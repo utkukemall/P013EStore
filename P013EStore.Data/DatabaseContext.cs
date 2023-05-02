@@ -54,6 +54,8 @@ namespace P013EStore.Data
 
             // Fluent Validation : data annotationdaki hata mesajları vb işlemlerini yönetebileceğimiz 3.parti paket.
 
+            // Katmanlı mimaride MVCWebUI katmanından direkt data katmanına erişilmesi istenmez, arada bir iş katmanının tüm db süreçlerini yönetmesi istenir. Bu yüzden solutiona service katmanı ekleyip Mvc katmanından service katmanına erişim vermemiz gerekir. Service katmanı da data katmanına erişir. Data katmanı da core katmanına erişir, böylece MVCUI > Serive > Data > Core ile en üstten en alt katmana kadar ulaşılabilmiş olunur. 
+
             base.OnModelCreating(modelBuilder);
         }
     }
