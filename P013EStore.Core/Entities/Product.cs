@@ -28,7 +28,7 @@ namespace P013EStore.Core.Entities
         [Display(Name = "Marka")]
         public int BrandId { get; set; }
         [Display(Name = "Marka")]
-        public Category? Brand { get; set; }
+        public Brand? Brand { get; set; }
 
     }
 }
