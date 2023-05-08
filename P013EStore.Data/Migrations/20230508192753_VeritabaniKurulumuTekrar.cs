@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace P013EStore.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Kurulum : Migration
+    public partial class VeritabaniKurulumuTekrar : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -141,7 +141,7 @@ namespace P013EStore.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "Id", "CreateDate", "Email", "IsActive", "IsAdmin", "Name", "Password", "Phone", "Surname", "UserGuid", "UserName" },
-                values: new object[] { 1, new DateTime(2023, 5, 3, 20, 6, 9, 840, DateTimeKind.Local).AddTicks(9297), "info@P013EStore.com", true, true, "Admin", "123", null, null, new Guid("36ad5e7d-3814-4bda-8f91-fa6d42b2eca3"), "Admin" });
+                values: new object[] { 1, new DateTime(2023, 5, 8, 22, 27, 53, 619, DateTimeKind.Local).AddTicks(3796), "info@P013EStore.com", true, true, "Admin", "123", null, null, new Guid("8b1870fe-d9d8-4b16-9c47-c1db54592785"), "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",

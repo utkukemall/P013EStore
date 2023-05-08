@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using P013EStore.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Main}/{action=Index}/{id?}"
+    );
+
 
 app.MapControllerRoute(
     name: "default",

@@ -12,8 +12,8 @@ using P013EStore.Data;
 namespace P013EStore.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230503170609_Kurulum")]
-    partial class Kurulum
+    [Migration("20230508192753_VeritabaniKurulumuTekrar")]
+    partial class VeritabaniKurulumuTekrar
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,13 +80,13 @@ namespace P013EStore.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 3, 20, 6, 9, 840, DateTimeKind.Local).AddTicks(9297),
+                            CreateDate = new DateTime(2023, 5, 8, 22, 27, 53, 619, DateTimeKind.Local).AddTicks(3796),
                             Email = "info@P013EStore.com",
                             IsActive = true,
                             IsAdmin = true,
                             Name = "Admin",
                             Password = "123",
-                            UserGuid = new Guid("36ad5e7d-3814-4bda-8f91-fa6d42b2eca3"),
+                            UserGuid = new Guid("8b1870fe-d9d8-4b16-9c47-c1db54592785"),
                             UserName = "Admin"
                         });
                 });

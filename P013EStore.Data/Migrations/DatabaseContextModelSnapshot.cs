@@ -77,13 +77,13 @@ namespace P013EStore.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 3, 20, 15, 26, 599, DateTimeKind.Local).AddTicks(3842),
+                            CreateDate = new DateTime(2023, 5, 8, 22, 27, 53, 619, DateTimeKind.Local).AddTicks(3796),
                             Email = "info@P013EStore.com",
                             IsActive = true,
                             IsAdmin = true,
                             Name = "Admin",
                             Password = "123",
-                            UserGuid = new Guid("85c194f3-dc95-4fed-8d2a-72d64681527f"),
+                            UserGuid = new Guid("8b1870fe-d9d8-4b16-9c47-c1db54592785"),
                             UserName = "Admin"
                         });
                 });

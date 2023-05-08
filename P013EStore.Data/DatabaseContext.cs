@@ -17,7 +17,7 @@ namespace P013EStore.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // OnConfiguring metodu EntityFrameworkCore ile gelir ve veritabanı bağlantı ayarlarını yapmamızı sağlar.
-            optionsBuilder.UseSqlServer(@"Server=(localdb)/MSSQLLocalDB; Database=P013EStore; Trusted_Connection=True");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=P013EStore; Trusted_Connection=True");
             // optionsBuilder.UseSqlServer(@"Server=(CanlıServerAdı; Database=CanlıdakiDatabase; Username=CanlıVeritabanıKullanıcıAdı; Password = CanlıVeriTabanıŞifre");
             base.OnConfiguring(optionsBuilder);
         }
