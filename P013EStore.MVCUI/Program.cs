@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Builder;
 using P013EStore.Data;
+using P013EStore.Service.Abstract;
+using P013EStore.Service.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DatabaseContext>();
+
+builder.Services.AddTransient(typeof(IService<>), typeof(Service<>)); // kendi yazdýðýmýz db iþlemlerini yapan servisi .net core da bu þekilde mvc projesine servis olarak tanýtýyoruz ki kullanabilelim.
 
 var app = builder.Build();
 
@@ -22,10 +25,9 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Main}/{action=Index}/{id?}"
-    );
-
+            name: "admin",
+            pattern: "{area:exists}/{controller=Main}/{action=Index}/{id?}"
+          );
 
 app.MapControllerRoute(
     name: "default",
