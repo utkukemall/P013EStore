@@ -26,7 +26,7 @@
                 <label asp-for="Logo" class="control-label"></label>
                 <input asp-for="Logo" class="form-control" type="file" />
                 <span asp-validation-for="Logo" class="text-danger"></span>
-                @if (Model.Logo is not null)
+                @if (!string.IsNullOrEmpty(Model.Logo))
                 {
                     <img src="/Img/@Model.Logo" alt="" height="50" />
                     <div class="form-group form-check">
