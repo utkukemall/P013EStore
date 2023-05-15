@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using P013EStore.Core.Entities;
 using P013EStore.MVCUI.Utils;
 using P013EStore.Service.Abstract;
@@ -8,43 +9,46 @@ using P013EStore.Service.Abstract;
 namespace P013EStore.MVCUI.Areas.Admin.Controllers
 {
     [Area("Admin"), Authorize]
-    public class BrandsController : Controller
+    public class SlidersController : Controller
     {
-        private readonly IService<Brand> _service; // readonly nesneler sadece constructor metotta doldurulabilir
-        public BrandsController(IService<Brand> service)
+        private readonly IService<Slider> _service;
+
+        public SlidersController(IService<Slider> service)
         {
             _service = service;
         }
 
-        // GET: BrandsController
-        public ActionResult Index()
+        // GET: SliderController
+        public async Task<ActionResult> Index()
         {
-            var model = _service.GetAll();
+            var model = await _service.GetAllAsync();
             return View(model);
         }
 
-        // GET: BrandsController/Details/5
+        // GET: SliderController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: BrandsController/Create
+        // GET: SliderController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BrandsController/Create
+        // POST: SliderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync(Brand collection, IFormFile? Logo)
+        public async Task<ActionResult> Create(Slider collection, IFormFile? Image)
         {
+
             try
             {
-                if (Logo is not null)
+                if (Image != null)
                 {
-                    collection.Logo = await FileHelper.FileLoaderAsync(Logo);
+                    collection.Image = await FileHelper.FileLoaderAsync(Image);
+
                 }
                 await _service.AddAsync(collection);
                 await _service.SaveAsync();
@@ -52,66 +56,76 @@ namespace P013EStore.MVCUI.Areas.Admin.Controllers
             }
             catch
             {
+                var data = await _service.GetAllAsync();
+                ViewBag.ParentId = new SelectList(data, "Id", "Name");
                 return View();
             }
         }
 
-        // GET: BrandsController/Edit/5
+        // GET: SliderController/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null) // id gönderilmeden direk edit sayfası açılırsa
+            if (id == null) // id gönderilmeden direkt edit sayfası açılırsa 
             {
                 return BadRequest(); // geriye geçersiz istek hatası dön
             }
-            var model = await _service.FindAsync(id.Value); // yukardaki id yi ? ile nullable yaparsak
+
+            var model = await _service.FindAsync(id.Value); // Yukarıdaki id'yi ? ile nullable yaparsak 
+
             if (model == null)
             {
-                return NotFound(); // kayıt bulunamadı : 404
+                return NotFound(); // kayıt bulunamadı
             }
+
             return View(model);
         }
 
-        // POST: BrandsController/Edit/5
+        // POST: SliderController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync(int id, Brand collection, IFormFile? Logo, bool? resmiSil)
+        public async Task<ActionResult> Edit(int id, Slider collection, IFormFile? Image, bool? resmiSil)
         {
+
             try
             {
-                if (resmiSil is not null && resmiSil == true)
+                if (Image != null)
                 {
-                    FileHelper.FileRemover(collection.Logo);
-                    collection.Logo = "";
+                    collection.Image = await FileHelper.FileLoaderAsync(Image);
                 }
-                if (Logo is not null)
+
+
+                if (resmiSil == true && resmiSil is not null && collection.Image is not null)
                 {
-                    collection.Logo = await FileHelper.FileLoaderAsync(Logo);
+                    FileHelper.FileRemover(collection.Image);
+                    collection.Image = null;
                 }
+                // Sunucudan tamamen dosya silme durumunu araştır.
                 _service.Update(collection);
                 await _service.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                var data = await _service.GetAllAsync();
+                ViewBag.ParentId = new SelectList(data, "Id", "Name");
                 return View();
             }
         }
 
-        // GET: BrandsController/Delete/5
-        public async Task<ActionResult> DeleteAsync(int id)
+        // GET: SliderController/Delete/5
+        public async Task<ActionResult> Delete(int id)
         {
             var model = await _service.FindAsync(id);
             return View(model);
         }
 
-        // POST: BrandsController/Delete/5
+        // POST: SliderController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Brand collection)
+        public ActionResult Delete(int id, Slider collection)
         {
             try
             {
-                FileHelper.FileRemover(collection.Logo);
                 _service.Delete(collection);
                 _service.Save();
                 return RedirectToAction(nameof(Index));
