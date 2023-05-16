@@ -17,7 +17,10 @@ namespace P013EStore.MVCUI.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            var model = await _serviceSlider.GetAllAsync();
+            var model = new HomePageViewModel()
+            {
+                Sliders = await _serviceSlider.GetAllAsync()
+            };
             return View(model);
         }
 
