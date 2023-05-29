@@ -2,7 +2,7 @@
 
 namespace P013EStore.MVCUI.Models
 {
-    public class AdminLoginViewModel
+    public class UserLoginViewModel
     {
         [Required(ErrorMessage = "{0} Boş Geçilemez!"), MaxLength(50)]
         public string Email { get; set; }

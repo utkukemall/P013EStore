@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using P013EStore.Core.Entities;
-using P013EStore.MVCUI.Utils;
 using P013EStore.Service.Abstract;
 
 namespace P013EStore.MVCUI.Areas.Admin.Controllers
@@ -56,7 +55,7 @@ namespace P013EStore.MVCUI.Areas.Admin.Controllers
         // GET: ContactsController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            var model = await _service.FindAsync(id); 
+            var model = await _service.FindAsync(id);
             return View(model);
         }
 

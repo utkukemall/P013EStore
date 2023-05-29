@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using P013EStore.Core.Entities;
@@ -106,7 +105,7 @@ namespace P013EStore.MVCUI.Areas.Admin.Controllers
             }
             catch
             {
-                ModelState.AddModelError("", "Hata oluştu!");
+                ModelState.AddModelError("", "Hata Oluştu!");
             }
             ViewBag.CategoryId = new SelectList(await _serviceCategory.GetAllAsync(), "Id", "Name");
             ViewBag.BrandId = new SelectList(await _serviceBrand.GetAllAsync(), "Id", "Name");

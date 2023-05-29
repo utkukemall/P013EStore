@@ -1,13 +1,15 @@
-﻿@model Contact
+﻿@model P013EStore.Core.Entities.Contact
 
 @{
-    ViewData["Title"] = "İletişim Formu Ekle";
+    ViewData["Title"] = "Bize Ulaşın";
 }
+<h1>İletişim Bilgilerimiz</h1>
 
-<hr />
 <div class="row">
+    @Html.Raw(TempData["Message"])
     <div class="col-md-4">
-        <form asp-action="Create">
+        <h4>Bize Ulaşın</h4>
+        <form asp-action="ContactUs">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -34,14 +36,33 @@
                 <textarea asp-for="Message" class="form-control"></textarea>
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
-            <div class="form-group mt-2">
-                <input type="submit" value="Ekle" class="btn btn-primary" />
+            <div class="form-group">
+                <input type="submit" value="Gönder" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Listeye Dön</a>
+    <div class="col-md-4">
+        <h4>Adres Bilgilerimiz</h4>
+        <hr />
+        <table>
+            <tr>
+                <th>Adres: </th>
+                <td> Kemankeş Karamustafa Paşa, Ali Paşa Değirmeni Sk. No:3, 34560 Beyoğlu/İstanbul</td>
+            </tr>
+            <tr>
+                <th>Telefon: </th>
+                <td> 0850 272 7454</td>
+            </tr>
+            <tr>
+                <th>Email: </th>
+                <td> info@siliconmade.com</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <h4>Konum Bilgilerimiz</h4>
+        <hr />
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12040.000958790157!2d28.9789395!3d41.0252507!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab974807d0575%3A0x44089783d1089f31!2sSiliconmade%20Academy!5e0!3m2!1str!2str!4v1685390506981!5m2!1str!2str" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 </div>
 

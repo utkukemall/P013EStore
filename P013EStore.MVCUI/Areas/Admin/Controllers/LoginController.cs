@@ -24,7 +24,7 @@ namespace P013EStore.MVCUI.Areas.Admin.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(); // Sistemden çıkış yap
-            return Redirect("/Admin/Login"); // Tekrardan giriş sayfasına yönlendir
+            return Redirect("/Admin/Login"); // tekrardan giriş sayfasına yönlendir
         }
         [HttpPost]
         public async Task<IActionResult> IndexAsync(AdminLoginViewModel admin)
@@ -45,13 +45,12 @@ namespace P013EStore.MVCUI.Areas.Admin.Controllers
                     await HttpContext.SignInAsync(principal); // HttpContext .net içerisinden geliyor ve uygulamanın çalışma anındaki içeriğe ulaşmamızı sağlıyor. SignInAsync metodu da .net içerisinde mevcut login işlemi yapmak istersek buradaki gibi kullanıyoruz.
                     return Redirect("/Admin/Main");
                 }
-                else // Eğer kullanıcı bilgileri yanlış girmişse veya db den silinmişse 
-                    ModelState.AddModelError("","Giriş Başarısız!");
+                else // eğer kullanıcı bilgileri yanlış girmişse veya kullanıcı db den silinmişse
+                    ModelState.AddModelError("", "Giriş Başarısız!");
             }
             catch (Exception hata)
             {
-
-                ModelState.AddModelError("", "Hata Oluştu!" + hata.Message);
+                ModelState.AddModelError("", "Hata Oluştu! " + hata.Message);
             }
             return View();
         }

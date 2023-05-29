@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using P013EStore.Core.Entities;
 using P013EStore.Service.Abstract;
@@ -87,12 +86,12 @@ namespace P013EStore.MVCUI.Areas.Admin.Controllers
         // POST: AppUsersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, AppUser collection)
+        public async Task<ActionResult> DeleteAsync(int id, AppUser collection)
         {
             try
             {
                 _service.Delete(collection);
-                _service.Save();
+                await _service.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch
