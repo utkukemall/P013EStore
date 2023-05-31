@@ -34,12 +34,12 @@ namespace P013EStore.MVCUI.Controllers
         {
             return View();
         }
-        [Route("Iletisim")]
+        [Route("iletisim")]
         public IActionResult ContactUs()
         {
             return View();
         }
-        [Route("Iletisim"),HttpPost]
+        [Route("iletisim"), HttpPost]
         public async Task<IActionResult> ContactUsAsync(Contact contact)
         {
             if (ModelState.IsValid)
@@ -50,14 +50,14 @@ namespace P013EStore.MVCUI.Controllers
                     var sonuc = await _serviceContact.SaveAsync();
                     if (sonuc > 0)
                     {
-                        await MailHelper.SendMailAsync(contact); // Gelen mesajı mail gönder.
+                        // await MailHelper.SendMailAsync(contact); // gelen mesajı mail gönder.
                         TempData["Message"] = "<div class='alert alert-success'>Mesajınız Gönderildi! Teşekkürler..</div>";
                         return RedirectToAction("ContactUs");
                     }
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("","Hata Oluştu!");
+                    ModelState.AddModelError("", "Hata Oluştu!");
                 }
             }
             return View();
