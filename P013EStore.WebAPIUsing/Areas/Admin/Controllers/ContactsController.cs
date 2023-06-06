@@ -1,43 +1,41 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using P013EStore.Core.Entities;
 
 namespace P013EStore.WebAPIUsing.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AppUsersController : Controller
+    public class ContactsController : Controller
     {
-        private readonly HttpClient _httpClient; // _httpClient nesnesini kullanarak api lere istek gönderebiliriz.
-        private readonly string _apiAdres = "https://localhost:7032/api/AppUsers"; // API adresini web api projesini çalıştırdığımızda adres çubuğundan veya herhangi bir controller a istek atarak Request URL kısmından veya web api projesinde Properties altındaki launchSettings.json kısmından linki bulabiliriz.
-        public AppUsersController(HttpClient httpClient)
+        private readonly HttpClient _httpClient;
+        private readonly string _apiAdres = "https://localhost:7032/api/Contacts";
+        public ContactsController(HttpClient httpClient)
         {
-            _httpClient = httpClient; // _httpClient nesnesinin apiye ulaşması için api projesinin de bu projeyle birlikte çalışıyor olması lazım!!!
-            // Aynı anda 2 projeyi çalıştırabilmek için Solution a sağ tıklayıp açılan menüden configure startup projects diyerek açılan ekrandan multiple alanına tıklayıp aynı anda başlatmak istediğimiz projeleri start olarak seçiyoruz!
+            _httpClient = httpClient;
         }
-
-        // GET: AppUsersController
+        // GET: ContactsController
         public async Task<ActionResult> Index()
         {
-            var model = await _httpClient.GetFromJsonAsync<List<AppUser>>(_apiAdres); // _httpClient nesnesi içindeki GetFromJsonAsync metodu kendisine verdiğimiz _apiAdres deki url e get isteği gönderir ve oradan gelen json formatındaki app user listesini List<AppUser> nesnesine dönüştürür.
+            var model = await _httpClient.GetFromJsonAsync<List<Contact>>(_apiAdres);
             return View(model);
         }
 
-        // GET: AppUsersController/Details/5
+        // GET: ContactsController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: AppUsersController/Create
+        // GET: ContactsController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AppUsersController/Create
+        // POST: ContactsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync(AppUser collection)
+        public async Task<ActionResult> CreateAsync(Contact collection)
         {
             try
             {
@@ -54,17 +52,17 @@ namespace P013EStore.WebAPIUsing.Areas.Admin.Controllers
             return View(collection);
         }
 
-        // GET: AppUsersController/Edit/5
+        // GET: ContactsController/Edit/5
         public async Task<ActionResult> EditAsync(int id)
         {
-            var model = await _httpClient.GetFromJsonAsync<AppUser>(_apiAdres + "/" + id);
+            var model = await _httpClient.GetFromJsonAsync<Contact>(_apiAdres + "/" + id);
             return View(model);
         }
 
-        // POST: AppUsersController/Edit/5
+        // POST: ContactsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync(int id, AppUser collection)
+        public async Task<ActionResult> EditAsync(int id, Contact collection)
         {
             try
             {
@@ -81,17 +79,17 @@ namespace P013EStore.WebAPIUsing.Areas.Admin.Controllers
             return View();
         }
 
-        // GET: AppUsersController/Delete/5
+        // GET: ContactsController/Delete/5
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var model = await _httpClient.GetFromJsonAsync<AppUser>(_apiAdres + "/" + id);
+            var model = await _httpClient.GetFromJsonAsync<Contact>(_apiAdres + "/" + id);
             return View(model);
         }
 
-        // POST: AppUsersController/Delete/5
+        // POST: ContactsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteAsync(int id, AppUser collection)
+        public async Task<ActionResult> DeleteAsync(int id, Contact collection)
         {
             try
             {
